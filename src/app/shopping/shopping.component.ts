@@ -14,10 +14,22 @@ export class ShoppingComponent implements OnInit {
   constructor(private sanitizer:DomSanitizer, private element:ElementRef, private ngZone: NgZone) { }
 
   ngOnInit() {
-    this.showCam();
+    this.getDevices();
   }
 
-  private showCam() {
+  private getDevices() {
+    let nav = <any>navigator;
+    nav.mediaDevices.enumerateDevices().then((devices) => {
+      let videoStreams: Array<any> = devices.filter((device) => device.kind === 'videoinput');
+      this.showCam(videoStreams.pop());
+    })
+  }
+
+  private createObjectURL(object) {
+    return (window.URL) ? window.URL.createObjectURL(object) : window['webkitURL'].createObjectURL(object);
+  }
+
+  private showCam(videoStream) {
     // 1. Casting necessary because TypeScript doesn't
     // know object Type 'navigator';
     let nav = <any>navigator;
@@ -29,10 +41,18 @@ export class ShoppingComponent implements OnInit {
     //setTimeout(() => { }, 100);
 
     // 4. Get stream from webcam
+    let constraints = {
+      audio: false,
+      video: {
+        optional: [{
+          sourceId: videoStream.deviceId
+        }]
+      }
+    };
     nav.getUserMedia(
-      {video: true},
+      constraints,
       (stream) => {
-        let webcamUrl = URL.createObjectURL(stream);
+        let webcamUrl = this.createObjectURL(stream);
 
         // 4a. Tell Angular the stream comes from a trusted source
         this.ngZone.run(() => {
