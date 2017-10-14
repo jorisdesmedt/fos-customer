@@ -10,6 +10,7 @@ export class ShoppingComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  	
   }
 
 }
