@@ -4,7 +4,6 @@ import { ShoppingComponent } from './shopping.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
-import { WebCamComponent } from 'ng2-webcam';
 
 @NgModule({
   imports: [
@@ -13,6 +12,6 @@ import { WebCamComponent } from 'ng2-webcam';
     MatCardModule,
     MatButtonModule
   ],
-  declarations: [ShoppingComponent, WebCamComponent]
+  declarations: [ShoppingComponent]
 })
 export class ShoppingModule { }
