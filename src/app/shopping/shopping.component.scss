@@ -4,7 +4,7 @@
 	.camera{
 		height: calc(40% - 25px);
 		width: 100%;
-		background-color: beige;
+		overflow: hidden;
 	}
 	.card_wrapper{
 		overflow: auto;
