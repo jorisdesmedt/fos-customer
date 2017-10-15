@@ -41,11 +41,24 @@
 	    				top: -3px;
 				    }
 				}
-				img{
+				.button_list{
+					float: right;
+				    margin-right: 5px;
+				    margin-bottom: -9px;
+				    position: relative;
+				    top: -3px;
+					img{
+						width: 25px;
+						display: block;
+						margin-top: 4px;
+						margin-bottom: 2px;
+					}
+				}
+				.trash{
 			    	width: 25px;
 				    float: right;
 				    position: relative;
-				    top: 12px;
+				    top: 17px;
 			    }
 			}
 		}
@@ -66,7 +79,7 @@
    			margin-top: 9px;
 		}
 		button{
-			background-color: #009688;
+			background-color: #9CBEF5;
 			color: white;
 			top: 7px;
 			float: right;

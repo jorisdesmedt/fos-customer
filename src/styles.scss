@@ -1,12 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 // @import "~@angular/material/prebuilt-themes/purple-green";
 
+@font-face{
+	font-family: robotoRegular;
+    src: url("./assets/Roboto/Roboto-Regular.ttf");
+}
+
+
 html, body, .ng-scope {
   height: 100%;
-  font-family: helvetica;
+  font-family: robotoRegular;
 }
 html{
-	background-color: #EDEDED;
+	background-color: #F6F8F9;
 }
 body{
 	margin: 0;
