@@ -1,5 +1,7 @@
-import { Component, OnInit, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, ElementRef, NgZone, Inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, DialogPosition } from '@angular/material';
 
 @Component({
   selector: 'app-shopping',
@@ -10,8 +12,36 @@ export class ShoppingComponent implements OnInit {
 
   public videosrc;
   public videoShow = false;
+  public totalPrice: number = 9.5;
+  public items: Array<any> = [];
 
-  constructor(private sanitizer:DomSanitizer, private element:ElementRef, private ngZone: NgZone) { }
+  constructor(private sanitizer:DomSanitizer, private element:ElementRef, private ngZone: NgZone, private db: AngularFireDatabase, public dialog: MatDialog) {
+    db.object('item').valueChanges().subscribe((value) => {
+      if (value === 'milk') {
+        this.items.push({
+          description: 'Milk 365',
+          price: 1.2
+        });
+        this.totalPrice += 1.2;
+      } else if (value === 'coke') {
+        let config: MatDialogConfig = new MatDialogConfig();
+        config.width = '250px';
+        // config.position = {
+        //   top: '20px',
+        //   left: '10px',
+        //   right: '10px'
+        // };
+        let dialogRef = this.dialog.open(DialogOverviewExampleDialog, config);
+        dialogRef.afterClosed().subscribe(result => {
+          this.items.unshift({
+            description: 'Coke Zero',
+            price: 2.3
+          });
+          this.totalPrice += 2.3;
+        });
+      }
+    })
+  }
 
   ngOnInit() {
     this.getDevices();
@@ -66,4 +96,21 @@ export class ShoppingComponent implements OnInit {
       },
       (err) => console.log(err));
   }
+}
+
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onClick(): void {
+    this.dialogRef.close();
+  }
+
 }

@@ -9,6 +9,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AngularFireModule } from 'angularfire2';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
@@ -19,6 +20,15 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   }
 ];
+
+const firebase = {
+  piKey: "AIzaSyA19HmgnAyzvMlFnMkuOq-7AbpIsi5LLdA",
+  authDomain: "fos-terminal-b7b2c.firebaseapp.com",
+  databaseURL: "https://fos-terminal-b7b2c.firebaseio.com",
+  projectId: "fos-terminal-b7b2c",
+  storageBucket: "fos-terminal-b7b2c.appspot.com",
+  messagingSenderId: "185271082136"
+};
 
 @NgModule({
   declarations: [
@@ -31,7 +41,8 @@ const appRoutes: Routes = [
     SettingsModule,
     RouterModule.forRoot(
       appRoutes
-    )
+    ),
+    AngularFireModule.initializeApp(firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

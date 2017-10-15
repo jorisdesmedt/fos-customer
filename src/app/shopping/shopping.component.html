@@ -3,6 +3,17 @@
     	<video [src]="videosrc" width="100%" *ngIf="videoShow" autoplay></video>
 	</div>
 	<div class="card_wrapper">
+    <div class="custom_card" *ngFor="let item of items">
+      <div class="card_content_wrapper">
+        <div class="card_image"></div>
+        <h2>{{item.description}}<br><span>{{item.price.toFixed(2)}}$</span></h2>
+        <img class="trash" src="../../assets/waste-bin.svg" />
+        <div class="button_list">
+          <img src="../../assets/plus.svg" />
+          <img src="../../assets/min.svg" />
+        </div>
+      </div>
+    </div>
 		<div class="custom_card">
 			<div class="card_content_wrapper">
 				<div class="card_image"></div>
@@ -16,7 +27,7 @@
 		</div>
 	</div>
 	<div class="navigation_bottom">
-		<h1>Total: 35.50$</h1>
+		<h1>Total: {{totalPrice.toFixed(2)}}$</h1>
 		<button mat-raised-button>SCAN</button>
 	</div>
 </div>
